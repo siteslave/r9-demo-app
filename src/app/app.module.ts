@@ -11,6 +11,7 @@ import { MainPage } from '../pages/main/main';
 import { IpdPage } from '../pages/ipd/ipd';
 import { OpdPage } from '../pages/opd/opd';
 import { SettingPage } from '../pages/setting/setting';
+import { AboutPage } from '../pages/about/about';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SettingPage } from '../pages/setting/setting';
     MainPage,
     IpdPage,
     OpdPage,
-    SettingPage
+    SettingPage,
+    AboutPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import { SettingPage } from '../pages/setting/setting';
     MainPage,
     IpdPage,
     OpdPage,
-    SettingPage
+    SettingPage,
+    AboutPage
   ],
   providers: [
     StatusBar,

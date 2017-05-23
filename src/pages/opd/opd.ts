@@ -23,4 +23,7 @@ export class OpdPage {
     console.log('ionViewDidLoad OpdPage');
   }
 
+  ionViewWillEnter() {
+    console.log('Enter....')
+  }
 }
