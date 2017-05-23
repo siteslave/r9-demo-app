@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar color="teal">
+    <ion-title>Main</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <button ion-item (click)="goOpdPage()">
+      <ion-icon name="people" color="primary" item-left></ion-icon>
+      ผู้ป่วยนอก (OPD)
+    </button>
+    <button ion-item (click)="goIpdPage()">
+      <ion-icon name="contacts" color="secondary" item-left></ion-icon>
+      ผู้ป่วยใน (IPD)
+    </button>
+    <button ion-item (click)="goSettingPage()">
+      <ion-icon name="hammer" color="danger" item-left></ion-icon>
+      ตั้งค่า
+    </button>
+  </ion-list>
+</ion-content>
