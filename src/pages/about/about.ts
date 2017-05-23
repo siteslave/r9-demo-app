@@ -19,7 +19,7 @@ export class AboutPage {
     console.log('ionViewDidLoad AboutPage');
   }
 
-  goBack() {
-    this.navCtrl.pop();
-  }
+  // goBack() {
+  //   this.navCtrl.pop();
+  // }
 }

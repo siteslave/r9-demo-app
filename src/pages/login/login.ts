@@ -5,7 +5,7 @@ import {
   AlertController
 } from 'ionic-angular';
 
-import { MainPage } from '../main/main';
+import { TabsPage } from '../tabs/tabs';
 
 @IonicPage()
 @Component({
@@ -37,7 +37,7 @@ export class LoginPage {
       loading.present();
       setTimeout(() => {
         loading.dismiss();
-        this.navCtrl.setRoot(MainPage);
+        this.navCtrl.setRoot(TabsPage);
       }, 3000);
     } else {
       let alert = this.alertCtrl.create({
