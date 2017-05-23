@@ -37,6 +37,7 @@ export class LoginPage {
       loading.present();
       setTimeout(() => {
         loading.dismiss();
+        localStorage.setItem('token', 'xxxxxxxxxxxxxx');
         this.navCtrl.setRoot(TabsPage);
       }, 3000);
     } else {

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 
 import { IpdPage } from '../ipd/ipd';
 import { OpdPage } from '../opd/opd';
 import { SettingPage } from '../setting/setting';
 import { AboutPage } from '../about/about';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -13,7 +14,11 @@ import { AboutPage } from '../about/about';
 })
 export class MainPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public app: App
+  ) {
   }
 
   ionViewDidLoad() {
@@ -42,6 +47,13 @@ export class MainPage {
 
   goSettingPage() {
     this.navCtrl.push(SettingPage)
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    let nav = this.app.getRootNav();
+    nav.setRoot(LoginPage);
+    // this.navCtrl.setRoot(LoginPage)
   }
 
 }
