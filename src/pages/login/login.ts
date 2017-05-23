@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { LoadingController } from 'ionic-angular';
+import {
+  LoadingController,
+  AlertController
+} from 'ionic-angular';
 
 import { MainPage } from '../main/main';
 
@@ -16,7 +19,8 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController
   ) {
   }
 
@@ -36,7 +40,12 @@ export class LoginPage {
         this.navCtrl.setRoot(MainPage);
       }, 3000);
     } else {
-      alert('Login failed!');
+      let alert = this.alertCtrl.create({
+        title: 'เกิดข้อผิดพลาด!',
+        subTitle: 'ชื่อผู้ใช้งาน/รหัสผ่าน ไม่ถูกต้อง!',
+        buttons: ['ตกลง']
+      });
+      alert.present();
     }
   }
 
