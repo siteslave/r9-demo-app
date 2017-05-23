@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 
 import { AboutPage } from '../about/about';
 import { SettingPage } from '../setting/setting';
@@ -15,9 +15,23 @@ export class TabsPage {
   tabSetting: any;
   tabAbout: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public events: Events
+  ) {
     this.tabAbout = AboutPage;
     this.tabHome = MainPage;
     this.tabSetting = SettingPage;
+  }
+
+  onTabChange(e) {
+    if (e.index === 1) {
+      this.events.publish('user:created', 'satit', Date.now());
+    }
+  }
+
+  setDataSetting() {
+
   }
 }

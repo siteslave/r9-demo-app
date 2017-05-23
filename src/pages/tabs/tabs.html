@@ -1,4 +1,4 @@
-  <ion-tabs color="teal">
+  <ion-tabs color="teal" (ionChange)="onTabChange($event)">
     <ion-tab tabIcon="home" tabTitle="Home" [root]="tabHome"></ion-tab>
     <ion-tab tabIcon="cog" tabTitle="Setting" [root]="tabSetting"></ion-tab>
     <ion-tab tabIcon="information-circle" tabTitle="About" [root]="tabAbout"></ion-tab>
