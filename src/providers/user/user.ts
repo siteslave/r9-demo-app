@@ -1,5 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
+
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -7,7 +9,8 @@ export class UserProvider {
 
   constructor(
     private http: Http,
-    @Inject('API_URL') private url: string
+    @Inject('API_URL') private url: string,
+    private authHttp: AuthHttp
   ) { }
 
   getUsers() {
@@ -27,7 +30,7 @@ export class UserProvider {
     console.log(limit, offset);
     return new Promise((resolve, reject) => {
       let url = `${this.url}/students/list/${limit}/${offset}`;
-      this.http.get(url)
+      this.authHttp.get(url)
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
