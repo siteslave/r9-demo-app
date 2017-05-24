@@ -55,6 +55,7 @@ export class LoginPage {
         }
       })
       .catch((error: any) => {
+        loading.dismiss();
         let alert = this.alertCtrl.create({
           title: 'เกิดข้อผิดพลาด!',
           subTitle: 'ไม่สามาถเชื่อมต่อกับ Server ได้!',
