@@ -11,7 +11,7 @@ export class UserProvider {
 
   getUsers() {
     return new Promise((resolve, reject) => {
-      let url = `http://jsonplaceholder.typicode.com/users`;
+      let url = `https://randomuser.me/api/?results=10`;
       this.http.get(url)
         .map(res => res.json())
         .subscribe(data => {
@@ -22,5 +22,10 @@ export class UserProvider {
       // .subscribe(function (data) { }, function (error) {})
     })
   }
+
+  // getUsers2() {
+  //     let url = `http://jsonplaceholder.typicode.com/users`;
+  //     return this.http.get(url);  
+  // }
 
 }

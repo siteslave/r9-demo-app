@@ -10,6 +10,8 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class IpdPage {
 
+  users: any = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -20,11 +22,12 @@ export class IpdPage {
   ionViewDidLoad() {
     this.userProvider.getUsers()
       .then((data: any) => {
-        console.log(data);
+        this.users = data.results;
       })
       .catch((error: any) => {
         console.error(error);
       });
+
   }
 
 }
