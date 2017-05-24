@@ -46,6 +46,7 @@ export class LoginPage {
           this.navCtrl.setRoot(TabsPage);
         } else {
           // login failed!
+          loading.dismiss();
           let alert = this.alertCtrl.create({
             title: 'เกิดข้อผิดพลาด!',
             subTitle: 'ชื่อผู้ใช้งาน/รหัสผ่าน ไม่ถูกต้อง!',
