@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { JwtHelper } from 'angular2-jwt';
+
 import {
   LoadingController,
   AlertController
@@ -17,6 +19,8 @@ import { UserProvider } from '../../providers/user/user';
 export class LoginPage {
   username: string;
   password: string;
+
+  jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(
     public navCtrl: NavController,
@@ -39,10 +43,15 @@ export class LoginPage {
       .then((data: any) => {
         if (data.ok) {
           // success
+          let token = data.token;
+          let decoded = this.jwtHelper.decodeToken(token);
+          console.log(token);
+          console.log(decoded);
+
           loading.dismiss();
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('fullname', data.fullname);
-          localStorage.setItem('id', data.id);
+          localStorage.setItem('token', token);
+          localStorage.setItem('fullname', decoded.fullname);
+          localStorage.setItem('id', decoded.id);
           this.navCtrl.setRoot(TabsPage);
         } else {
           // login failed!
