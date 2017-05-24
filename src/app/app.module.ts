@@ -49,6 +49,7 @@ import { UserProvider } from '../providers/user/user';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    { provide: 'API_URL', useValue: 'http://localhost:3000' },
     UserProvider
   ]
 })

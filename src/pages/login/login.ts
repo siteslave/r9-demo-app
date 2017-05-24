@@ -6,6 +6,8 @@ import {
 } from 'ionic-angular';
 
 import { TabsPage } from '../tabs/tabs';
+import { UserProvider } from '../../providers/user/user';
+
 
 @IonicPage()
 @Component({
@@ -20,34 +22,47 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private userProvider: UserProvider
   ) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
   login() {
-    if (this.username === 'admin' && this.password === 'admin') {
-      let loading = this.loadingCtrl.create({
-        spinner: 'dots',
-        content: 'รอซักครู่...'
+
+    let loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'รอซักครู่...'
+    });
+    loading.present();
+
+    this.userProvider.doLogin(this.username, this.password)
+      .then((data: any) => {
+        if (data.ok) {
+          // success
+          loading.dismiss();
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('fullname', data.fullname);
+          localStorage.setItem('id', data.id);
+          this.navCtrl.setRoot(TabsPage);
+        } else {
+          // login failed!
+          let alert = this.alertCtrl.create({
+            title: 'เกิดข้อผิดพลาด!',
+            subTitle: 'ชื่อผู้ใช้งาน/รหัสผ่าน ไม่ถูกต้อง!',
+            buttons: ['ตกลง']
+          });
+          alert.present();
+        }
+      })
+      .catch((error: any) => {
+        let alert = this.alertCtrl.create({
+          title: 'เกิดข้อผิดพลาด!',
+          subTitle: 'ไม่สามาถเชื่อมต่อกับ Server ได้!',
+          buttons: ['ตกลง']
+        });
+        alert.present();
       });
-      loading.present();
-      setTimeout(() => {
-        loading.dismiss();
-        localStorage.setItem('token', 'xxxxxxxxxxxxxx');
-        this.navCtrl.setRoot(TabsPage);
-      }, 3000);
-    } else {
-      let alert = this.alertCtrl.create({
-        title: 'เกิดข้อผิดพลาด!',
-        subTitle: 'ชื่อผู้ใช้งาน/รหัสผ่าน ไม่ถูกต้อง!',
-        buttons: ['ตกลง']
-      });
-      alert.present();
-    }
+
   }
 
 }
