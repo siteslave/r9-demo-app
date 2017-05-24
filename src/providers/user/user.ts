@@ -43,7 +43,7 @@ export class UserProvider {
   getStudentTotal() {
     return new Promise((resolve, reject) => {
       let url = `${this.url}/students/total`;
-      this.http.get(url)
+      this.authHttp.get(url)
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
