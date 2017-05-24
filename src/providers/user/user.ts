@@ -19,7 +19,6 @@ export class UserProvider {
         }, error => {
           reject(error);
         });
-      // .subscribe(function (data) { }, function (error) {})
     })
   }
 
