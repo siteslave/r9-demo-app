@@ -23,6 +23,22 @@ export class UserProvider {
     })
   }
 
+  getStudents() {
+    return new Promise((resolve, reject) => {
+      // let url = this.url + '/students/list'
+      // + '/20';
+
+      let url = `${this.url}/students/list`;
+      this.http.get(url)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    })
+  }
+
   doLogin(username: string, password: string) {
     return new Promise((resolve, reject) => {
       let url = `${this.url}/users`;

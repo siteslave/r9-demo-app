@@ -34,9 +34,9 @@ export class IpdPage {
     // show loading
     loading.present();
 
-    this.userProvider.getUsers()
+    this.userProvider.getStudents()
       .then((data: any) => {
-        this.users = data.results;
+        this.users = data.rows;
         // hide loading
         loading.dismiss();
       })
