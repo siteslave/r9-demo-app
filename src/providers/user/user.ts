@@ -23,12 +23,23 @@ export class UserProvider {
     })
   }
 
-  getStudents() {
+  getStudents(limit: number, offset: number) {
+    console.log(limit, offset);
     return new Promise((resolve, reject) => {
-      // let url = this.url + '/students/list'
-      // + '/20';
+      let url = `${this.url}/students/list/${limit}/${offset}`;
+      this.http.get(url)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    })
+  }
 
-      let url = `${this.url}/students/list`;
+  getStudentTotal() {
+    return new Promise((resolve, reject) => {
+      let url = `${this.url}/students/total`;
       this.http.get(url)
         .map(res => res.json())
         .subscribe(data => {

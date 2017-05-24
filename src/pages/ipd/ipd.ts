@@ -17,6 +17,9 @@ import { UserProvider } from '../../providers/user/user';
 export class IpdPage {
 
   users: any = [];
+  perPage = 8;
+  totalRecord = 0;
+  startRecord = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -34,10 +37,13 @@ export class IpdPage {
     // show loading
     loading.present();
 
-    this.userProvider.getStudents()
+    this.userProvider.getStudents(this.perPage, 0)
       .then((data: any) => {
         this.users = data.rows;
-        // hide loading
+        return this.userProvider.getStudentTotal();
+      })
+      .then((data: any) => {
+        this.totalRecord = data.total;
         loading.dismiss();
       })
       .catch((error: any) => {
@@ -46,6 +52,29 @@ export class IpdPage {
         console.error(error);
       });
 
+  }
+
+
+  doInfinite(infiniteScroll) {
+    if (this.startRecord <= this.totalRecord) {
+      this.startRecord += +this.perPage;
+
+      let limit = +this.perPage;
+      let offset = +this.startRecord;
+      console.log(limit);
+      console.log(offset);
+
+      this.userProvider.getStudents(limit, offset)
+        .then((data: any) => {
+          this.users.push(data.rows);
+          infiniteScroll.complete();
+        })
+        .catch((error: any) => {
+          infiniteScroll.complete();
+        });
+    } else {
+      infiniteScroll.complete();
+    }
   }
 
 }
