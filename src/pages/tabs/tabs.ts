@@ -19,6 +19,8 @@ export class TabsPage {
   tabCharts: any;
   tabMessages: any;
 
+  messageCount = 1;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -29,6 +31,12 @@ export class TabsPage {
     this.tabSetting = SettingPage;
     this.tabCharts = ChartsPage;
     this.tabMessages = MessagesPage;
+
+    this.events.subscribe('notify:count', () => {
+      console.log('Badge......')
+      this.messageCount +=1;
+    });
+
   }
 
   onTabChange(e) {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
@@ -31,7 +31,8 @@ export class LoginPage {
     private alertCtrl: AlertController,
     private userProvider: UserProvider,
     private encryptProvider: EncryptProvider,
-    private push: Push
+    private push: Push,
+    private events: Events
   ) {
   }
 
@@ -65,6 +66,11 @@ export class LoginPage {
           };
 
           const pushObject: PushObject = this.push.init(options);
+
+          pushObject.on('notification').subscribe((notification: any) => {
+            console.log('Received a notification', notification);
+            this.events.publish('notify:count');
+          });
 
           pushObject.on('registration').subscribe((registration: any) => {
             // console.log(registration.registrationId);
