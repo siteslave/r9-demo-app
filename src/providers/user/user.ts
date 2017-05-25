@@ -53,12 +53,11 @@ export class UserProvider {
     })
   }
 
-  doLogin(username: string, password: string) {
+  doLogin(data: string) {
     return new Promise((resolve, reject) => {
       let url = `${this.url}/users`;
       this.http.post(url, {
-        username: username,
-        password: password
+        data: data
       })
         .map(res => res.json())
         .subscribe(data => {

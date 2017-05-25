@@ -9,7 +9,7 @@ import {
 
 import { TabsPage } from '../tabs/tabs';
 import { UserProvider } from '../../providers/user/user';
-
+import { EncryptProvider } from '../../providers/encrypt/encrypt';
 
 @IonicPage()
 @Component({
@@ -27,7 +27,8 @@ export class LoginPage {
     public navParams: NavParams,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
-    private userProvider: UserProvider
+    private userProvider: UserProvider,
+    private encryptProvider: EncryptProvider
   ) {
   }
 
@@ -39,7 +40,10 @@ export class LoginPage {
     });
     loading.present();
 
-    this.userProvider.doLogin(this.username, this.password)
+    let objData = { username: this.username, password: this.password };
+    let encText = this.encryptProvider.encrypt(JSON.stringify(objData));
+
+    this.userProvider.doLogin(encText)
       .then((data: any) => {
         if (data.ok) {
           // success
