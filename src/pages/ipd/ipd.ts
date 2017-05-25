@@ -7,6 +7,7 @@ import {
 } from 'ionic-angular';
 
 import { UserProvider } from '../../providers/user/user';
+import { EncryptProvider } from '../../providers/encrypt/encrypt';
 
 @IonicPage()
 @Component({
@@ -25,6 +26,7 @@ export class IpdPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public userProvider: UserProvider,
+    public encryptProvider: EncryptProvider,
     public loadingCtrl: LoadingController
   ) {
   }
@@ -39,7 +41,11 @@ export class IpdPage {
 
     this.userProvider.getStudents(this.perPage, 0)
       .then((data: any) => {
-        this.users = data.rows;
+        let encText = data.data;
+        let decryptedText = this.encryptProvider.decrypt(encText);
+        let students = JSON.parse(decryptedText);
+
+        this.users = students;
         return this.userProvider.getStudentTotal();
       })
       .then((data: any) => {
