@@ -53,6 +53,20 @@ export class UserProvider {
     })
   }
 
+  getChartData() {
+    return new Promise((resolve, reject) => {
+      // let url = `http://203.157.182.15/api/getReport/3/0/2016`;
+      let url = `${this.url}/chart-data`;
+      this.authHttp.get(url)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    })
+  }
+
   doLogin(data: string) {
     return new Promise((resolve, reject) => {
       let url = `${this.url}/users`;
