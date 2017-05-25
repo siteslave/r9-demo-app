@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar color="teal">
+    <ion-title>กราฟสถิติ</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-slides pager loop="true">
+
+    <ion-slide>
+      <chart [options]="options"></chart>
+    </ion-slide>
+
+    <ion-slide>
+      <chart [options]="options2"></chart>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

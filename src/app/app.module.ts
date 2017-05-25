@@ -17,6 +17,8 @@ import { OpdPage } from '../pages/opd/opd';
 import { SettingPage } from '../pages/setting/setting';
 import { AboutPage } from '../pages/about/about';
 import { TabsPage } from '../pages/tabs/tabs';
+import { ChartsPage } from '../pages/charts/charts';
+
 import { UserProvider } from '../providers/user/user';
 import { EncryptProvider } from '../providers/encrypt/encrypt';
 
@@ -50,7 +52,8 @@ export function getAuthHttp(http) {
     OpdPage,
     SettingPage,
     AboutPage,
-    TabsPage
+    TabsPage,
+    ChartsPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ export function getAuthHttp(http) {
     OpdPage,
     SettingPage,
     AboutPage,
-    TabsPage
+    TabsPage,
+    ChartsPage
   ],
   providers: [
     StatusBar,
