@@ -16,7 +16,10 @@
     <ion-input type="text" [(ngModel)]="message"></ion-input>
   </ion-item>
   <ion-item>
-    <button ion-button color="danger" full (click)="selectUsers()">เลือกผู้ใช้งาน</button>
+    <button ion-button color="danger" full (click)="selectUsers()">เลือกผู้ใช้งาน ({{selectedUsers.length}})</button>
+  </ion-item>
+  <ion-item>
+    <button ion-button color="success" full [disabled]="!message || !selectedUsers.length" (click)="sendMessage()">ส่งแจ้งเตือน</button>
   </ion-item>
 </ion-list>
 </ion-content>

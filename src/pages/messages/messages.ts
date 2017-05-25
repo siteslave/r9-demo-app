@@ -37,13 +37,34 @@ export class MessagesPage {
 
     alert.addButton('ยกเลิก');
     alert.addButton({
-      text: 'ส่งแจ้งเตือน',
+      text: 'ตกลง',
       handler: data => {
-        console.log('Checkbox data:', data);
+        this.selectedUsers = data;
       }
     });
     alert.present();
 
+  }
+
+  sendMessage() {
+    this.userProvider.sendMessage(this.message, this.selectedUsers)
+      .then((data: any) => {
+        if (data.ok) {
+          let alert = this.alertCtrl.create({
+            title: 'ผลการส่ง',
+            subTitle: 'ส่งข้อมูลแจ้งเตือนสำเร็จ',
+            buttons: ['ตกลง']
+          });
+          alert.present();
+        } else {
+          let alert = this.alertCtrl.create({
+            title: 'ผลการส่ง',
+            subTitle: 'ไม่สามารถส่งแจ้งเตือนได้ : ' + JSON.stringify(data.error),
+            buttons: ['ตกลง']
+          });
+          alert.present();
+        }
+      })
   }
 
   ionViewDidLoad() {

@@ -123,5 +123,21 @@ export class UserProvider {
     })
   }
 
+  sendMessage(msg: string, ids: any[]) {
+    return new Promise((resolve, reject) => {
+      let url = `${this.url}/students/send-message`;
+      this.authHttp.post(url, {
+        msg: msg,
+        ids: ids
+      })
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    })
+  }
+
 
 }
