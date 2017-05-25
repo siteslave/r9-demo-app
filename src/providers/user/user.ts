@@ -27,9 +27,8 @@ export class UserProvider {
   }
 
   getStudents(limit: number, offset: number) {
-    console.log(limit, offset);
     return new Promise((resolve, reject) => {
-      let url = `${this.url}/students/list/${limit}/${offset}`;
+      let url = `${this.url}/students/list`;
       this.authHttp.get(url)
         .map(res => res.json())
         .subscribe(data => {

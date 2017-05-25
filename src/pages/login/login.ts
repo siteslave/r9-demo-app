@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
+
 import {
   LoadingController,
   AlertController
@@ -28,9 +30,11 @@ export class LoginPage {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private userProvider: UserProvider,
-    private encryptProvider: EncryptProvider
+    private encryptProvider: EncryptProvider,
+    private push: Push
   ) {
   }
+
 
   login() {
 
@@ -47,6 +51,25 @@ export class LoginPage {
       .then((data: any) => {
         if (data.ok) {
           // success
+
+          const options: PushOptions = {
+            android: {
+              senderID: '479076121612'
+            },
+            ios: {
+              alert: 'true',
+              badge: true,
+              sound: 'false'
+            },
+            windows: {}
+          };
+
+          const pushObject: PushObject = this.push.init(options);
+
+          pushObject.on('registration').subscribe((registration: any) => {
+            console.log(registration);
+          });
+
           let token = data.token;
           let decoded = this.jwtHelper.decodeToken(token);
           console.log(token);
