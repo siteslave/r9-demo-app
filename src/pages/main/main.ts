@@ -7,18 +7,27 @@ import { SettingPage } from '../setting/setting';
 import { AboutPage } from '../about/about';
 import { LoginPage } from '../login/login';
 
+import { JwtHelper } from 'angular2-jwt';
 @IonicPage()
 @Component({
   selector: 'page-main',
   templateUrl: 'main.html',
 })
 export class MainPage {
+  jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public app: App
   ) {
+    try {
+      let token = localStorage.getItem('token');
+      console.log(this.jwtHelper.isTokenExpired(token));
+      console.log(this.jwtHelper.decodeToken(token));
+    } catch (error) {
+      this.logout();
+    }
   }
 
   ionViewDidLoad() {
@@ -26,7 +35,7 @@ export class MainPage {
   }
 
   goAbout() {
-    this.navCtrl.push(AboutPage, {name: 'Ionic 3', id: 1});
+    this.navCtrl.push(AboutPage, { name: 'Ionic 3', id: 1 });
   }
 
   goOpdPage() {

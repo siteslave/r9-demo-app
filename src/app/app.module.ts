@@ -16,6 +16,7 @@ import { SettingPage } from '../pages/setting/setting';
 import { AboutPage } from '../pages/about/about';
 import { TabsPage } from '../pages/tabs/tabs';
 import { UserProvider } from '../providers/user/user';
+import { EncryptProvider } from '../providers/encrypt/encrypt';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -64,7 +65,8 @@ export function getAuthHttp(http) {
       useFactory: getAuthHttp,
       deps: [Http]
     },
-    UserProvider
+    UserProvider,
+    EncryptProvider
   ]
 })
 export class AppModule { }
