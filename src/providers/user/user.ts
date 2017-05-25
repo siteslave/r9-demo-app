@@ -84,7 +84,7 @@ export class UserProvider {
   registerDevice(id: any, deviceToken: string) {
     return new Promise((resolve, reject) => {
       let url = `${this.url}/students/register-device`;
-      this.http.post(url, {
+      this.authHttp.post(url, {
         id: id,
         deviceToken: deviceToken
       })
