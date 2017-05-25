@@ -81,6 +81,21 @@ export class UserProvider {
     })
   }
 
+  registerDevice(id: any, deviceToken: string) {
+    return new Promise((resolve, reject) => {
+      let url = `${this.url}/students/register-device`;
+      this.http.post(url, {
+        id: id,
+        deviceToken: deviceToken
+      })
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    })
+  }
 
 
 }

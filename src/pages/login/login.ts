@@ -67,19 +67,42 @@ export class LoginPage {
           const pushObject: PushObject = this.push.init(options);
 
           pushObject.on('registration').subscribe((registration: any) => {
-            console.log(registration);
+            // console.log(registration.registrationId);
+            let token = data.token;
+            let decoded = this.jwtHelper.decodeToken(token);
+
+            // loading.dismiss();
+            localStorage.setItem('token', token);
+            localStorage.setItem('fullname', decoded.fullname);
+            localStorage.setItem('id', decoded.id);
+
+            let deviceToken = registration.registrationId;
+
+            this.userProvider.registerDevice(decoded.id, deviceToken)
+              .then((data: any) => {
+                loading.dismiss();
+                if (data.ok) {
+                  this.navCtrl.setRoot(TabsPage);
+                } else {
+                  let alert = this.alertCtrl.create({
+                    title: 'เกิดข้อผิดพลาด!',
+                    subTitle: 'ไม่สามารถลงทะเบียน device token ได้!',
+                    buttons: ['ตกลง']
+                  });
+                  alert.present();
+                }
+              })
+              .catch((error: any) => {
+                let alert = this.alertCtrl.create({
+                  title: 'เกิดข้อผิดพลาด!',
+                  subTitle: 'ไม่สามารถเชื่อมต่อกับ Server ได้',
+                  buttons: ['ตกลง']
+                });
+                alert.present();
+              });
+
           });
 
-          let token = data.token;
-          let decoded = this.jwtHelper.decodeToken(token);
-          console.log(token);
-          console.log(decoded);
-
-          loading.dismiss();
-          localStorage.setItem('token', token);
-          localStorage.setItem('fullname', decoded.fullname);
-          localStorage.setItem('id', decoded.id);
-          this.navCtrl.setRoot(TabsPage);
         } else {
           // login failed!
           loading.dismiss();
