@@ -24,6 +24,7 @@
     "@ionic-native/splash-screen": "3.7.0",
     "@ionic-native/status-bar": "3.7.0",
     "@ionic/storage": "2.0.1",
+    "angular2-highcharts": "^0.5.5",
     "angular2-jwt": "^0.2.3",
     "crypto-js": "^3.1.9-1",
     "ionic-angular": "3.2.1",

@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule, Http } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
+import { ChartModule } from 'angular2-highcharts';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -17,6 +19,18 @@ import { AboutPage } from '../pages/about/about';
 import { TabsPage } from '../pages/tabs/tabs';
 import { UserProvider } from '../providers/user/user';
 import { EncryptProvider } from '../providers/encrypt/encrypt';
+
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+
+export function highchartsFactory() {
+  return require('highcharts');
+}
+
+const Highcharts = require('highcharts');
+
+Highcharts.setOptions({
+  credits: false
+});
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -41,6 +55,7 @@ export function getAuthHttp(http) {
   imports: [
     BrowserModule,
     HttpModule,
+    ChartModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -58,6 +73,7 @@ export function getAuthHttp(http) {
   providers: [
     StatusBar,
     SplashScreen,
+    { provide: HighchartsStatic, useFactory: highchartsFactory },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: 'API_URL', useValue: 'http://localhost:3000' },
     {
