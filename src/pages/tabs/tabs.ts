@@ -5,6 +5,7 @@ import { AboutPage } from '../about/about';
 import { SettingPage } from '../setting/setting';
 import { MainPage } from '../main/main';
 import { ChartsPage } from '../charts/charts';
+import { MessagesPage } from '../messages/messages';
 
 @IonicPage()
 @Component({
@@ -16,6 +17,7 @@ export class TabsPage {
   tabSetting: any;
   tabAbout: any;
   tabCharts: any;
+  tabMessages: any;
 
   constructor(
     public navCtrl: NavController,
@@ -26,6 +28,7 @@ export class TabsPage {
     this.tabHome = MainPage;
     this.tabSetting = SettingPage;
     this.tabCharts = ChartsPage;
+    this.tabMessages = MessagesPage;
   }
 
   onTabChange(e) {

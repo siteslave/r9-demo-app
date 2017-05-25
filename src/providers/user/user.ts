@@ -97,5 +97,31 @@ export class UserProvider {
     })
   }
 
+  getUserList() {
+    return new Promise((resolve, reject) => {
+      let url = `${this.url}/students/users-list`;
+      this.authHttp.get(url)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    })
+  }
+
+  getGroupList() {
+    return new Promise((resolve, reject) => {
+      let url = `${this.url}/students/groups-list`;
+      this.authHttp.get(url)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    })
+  }
+
 
 }

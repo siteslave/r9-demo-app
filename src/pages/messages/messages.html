@@ -1,0 +1,22 @@
+
+<ion-header>
+
+  <ion-navbar color="teal">
+    <ion-title>Messages</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-list>
+
+  <ion-item>
+    <ion-label stacked>ข้อความ</ion-label>
+    <ion-input type="text" [(ngModel)]="message"></ion-input>
+  </ion-item>
+  <ion-item>
+    <button ion-button color="danger" full (click)="selectUsers()">เลือกผู้ใช้งาน</button>
+  </ion-item>
+</ion-list>
+</ion-content>

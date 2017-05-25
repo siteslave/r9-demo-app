@@ -20,6 +20,7 @@ import { SettingPage } from '../pages/setting/setting';
 import { AboutPage } from '../pages/about/about';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ChartsPage } from '../pages/charts/charts';
+import { MessagesPage } from '../pages/messages/messages';
 
 import { UserProvider } from '../providers/user/user';
 import { EncryptProvider } from '../providers/encrypt/encrypt';
@@ -55,7 +56,8 @@ export function getAuthHttp(http) {
     SettingPage,
     AboutPage,
     TabsPage,
-    ChartsPage
+    ChartsPage,
+    MessagesPage
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ export function getAuthHttp(http) {
     SettingPage,
     AboutPage,
     TabsPage,
-    ChartsPage
+    ChartsPage,
+    MessagesPage
   ],
   providers: [
     StatusBar,
@@ -82,7 +85,7 @@ export function getAuthHttp(http) {
     Push,
     { provide: HighchartsStatic, useFactory: highchartsFactory },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    { provide: 'API_URL', useValue: 'http://192.168.43.76:3000' },
+    { provide: 'API_URL', useValue: 'http://192.168.10.71:3000' },
     {
       provide: AuthHttp,
       useFactory: getAuthHttp,
