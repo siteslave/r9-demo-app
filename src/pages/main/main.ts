@@ -7,6 +7,8 @@ import { SettingPage } from '../setting/setting';
 import { AboutPage } from '../about/about';
 import { LoginPage } from '../login/login';
 
+import { ContactsPage } from '../contacts/contacts';
+
 import { JwtHelper } from 'angular2-jwt';
 @IonicPage()
 @Component({
@@ -38,6 +40,10 @@ export class MainPage {
     this.navCtrl.push(AboutPage, { name: 'Ionic 3', id: 1 });
   }
 
+  goContact() {
+    this.navCtrl.push(ContactsPage);
+  }
+  
   goOpdPage() {
     let params = {
       hn: '000001',

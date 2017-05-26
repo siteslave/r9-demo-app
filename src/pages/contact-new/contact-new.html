@@ -1,0 +1,33 @@
+
+<ion-header>
+
+  <ion-navbar color="teal">
+    <ion-title>เพิ่มผู้ติดต่อ</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-list>
+
+  <ion-item>
+    <ion-label floating>First name</ion-label>
+    <ion-input [(ngModel)]="firstName" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Last name</ion-label>
+    <ion-input [(ngModel)]="lastName" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Email</ion-label>
+    <ion-input [(ngModel)]="email" type="email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <button ion-button (click)="saveContact()">Save</button>
+  </ion-item>
+</ion-list>
+</ion-content>

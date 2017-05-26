@@ -24,6 +24,8 @@ import { AboutPage } from '../pages/about/about';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ChartsPage } from '../pages/charts/charts';
 import { MessagesPage } from '../pages/messages/messages';
+import { ContactNewPage } from '../pages/contact-new/contact-new';
+import { ContactsPage } from '../pages/contacts/contacts';
 
 import { UserProvider } from '../providers/user/user';
 import { EncryptProvider } from '../providers/encrypt/encrypt';
@@ -60,7 +62,9 @@ export function getAuthHttp(http) {
     AboutPage,
     TabsPage,
     ChartsPage,
-    MessagesPage
+    MessagesPage,
+    ContactNewPage,
+    ContactsPage
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,9 @@ export function getAuthHttp(http) {
     AboutPage,
     TabsPage,
     ChartsPage,
-    MessagesPage
+    MessagesPage,
+    ContactNewPage,
+    ContactsPage
   ],
   providers: [
     StatusBar,

@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar color="teal">
+    <ion-title>รายชื่อติดต่อ</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="addContact()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list no-lines>
+    <button ion-item *ngFor="let contact of contacts">
+    {{ contact.first_name }} {{ contact.last_name }}
+  </button>
+  </ion-list>
+</ion-content>
