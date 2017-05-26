@@ -43,6 +43,8 @@ export class ContactsPage {
   }
 
   getContacts() {
+    this.contacts = [];
+    
     this.platform.ready().then(() => {
       this.db.create({
         name: 'data.db',
