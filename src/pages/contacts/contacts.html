@@ -12,7 +12,7 @@
     <button ion-fab color="danger" (click)="addContact()"><ion-icon name="person-add"></ion-icon></button>
   </ion-fab>
   <ion-toolbar color="primary">
-    <ion-searchbar (ionInput)="search($event)" debounce="1000"></ion-searchbar>
+    <ion-searchbar (ionCancel)="onCancel($event)" (ionInput)="search($event)" debounce="1000"></ion-searchbar>
   </ion-toolbar>
   <ion-list no-lines>
 

@@ -45,6 +45,10 @@ export class ContactsPage {
     this.getContacts();
   }
 
+  onCancel(event) {
+    this.getContacts();
+  }
+
   showConfirm(contact) {
     let confirm = this.alertCtrl.create({
       title: 'Are you sure?',
