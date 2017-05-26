@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Push } from '@ionic-native/push';
+import { Camera } from '@ionic-native/camera';
 
 import { HttpModule, Http } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
@@ -83,9 +84,10 @@ export function getAuthHttp(http) {
     StatusBar,
     SplashScreen,
     Push,
+    Camera,
     { provide: HighchartsStatic, useFactory: highchartsFactory },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    { provide: 'API_URL', useValue: 'http://192.168.10.71:3000' },
+    { provide: 'API_URL', useValue: 'http://192.168.43.76:3000' },
     {
       provide: AuthHttp,
       useFactory: getAuthHttp,

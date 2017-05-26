@@ -53,6 +53,14 @@ export class LoginPage {
         if (data.ok) {
           // success
 
+          let token = data.token;
+          let decoded = this.jwtHelper.decodeToken(token);
+
+          // loading.dismiss();
+          localStorage.setItem('token', token);
+          localStorage.setItem('fullname', decoded.fullname);
+          localStorage.setItem('id', decoded.id);
+
           const options: PushOptions = {
             android: {
               senderID: '479076121612'
@@ -69,18 +77,11 @@ export class LoginPage {
 
           pushObject.on('notification').subscribe((notification: any) => {
             console.log('Received a notification', notification);
-            this.events.publish('notify:count');
+            this.events.publish('notify:count', 1);
           });
 
           pushObject.on('registration').subscribe((registration: any) => {
             // console.log(registration.registrationId);
-            let token = data.token;
-            let decoded = this.jwtHelper.decodeToken(token);
-
-            // loading.dismiss();
-            localStorage.setItem('token', token);
-            localStorage.setItem('fullname', decoded.fullname);
-            localStorage.setItem('id', decoded.id);
 
             let deviceToken = registration.registrationId;
 

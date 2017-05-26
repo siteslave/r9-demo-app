@@ -15,7 +15,27 @@
 
 <ion-content padding>
 
-  {{ name }}
 
-  <!--<button ion-button (click)="goBack()">Back</button>-->
+  <ion-card>
+
+    <img *ngIf="!base64Preview" src="http://placehold.it/350x150"/>
+    <img *ngIf="base64Preview" [src]="base64Preview"/>
+
+    <ion-row no-padding>
+      <ion-col>
+        <button (click)="takePicture()" ion-button clear small icon-left>
+          <ion-icon name='camera'></ion-icon>
+          Camera
+        </button>
+      </ion-col>
+      <ion-col text-center>
+        <button ion-button clear small color="danger" icon-left>
+          <ion-icon name='image'></ion-icon>
+          Browse...
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
 </ion-content>

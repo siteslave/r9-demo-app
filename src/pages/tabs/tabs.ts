@@ -32,14 +32,16 @@ export class TabsPage {
     this.tabCharts = ChartsPage;
     this.tabMessages = MessagesPage;
 
-    this.events.subscribe('notify:count', () => {
-      console.log('Badge......')
-      this.messageCount +=1;
-    });
-
   }
 
+  ionViewDidLoad() {
+    this.events.subscribe('notify:count', (count) => {
+      console.log('Badge......');
+      this.messageCount += count;
+    });
+  }
   onTabChange(e) {
+    // this.messageCount++;
     if (e.index === 1) {
       this.events.publish('user:created', 'satit', Date.now());
     }

@@ -20,6 +20,7 @@
         "@angular/http": "4.1.0",
         "@angular/platform-browser": "4.1.0",
         "@angular/platform-browser-dynamic": "4.1.0",
+        "@ionic-native/camera": "^3.10.3",
         "@ionic-native/core": "3.7.0",
         "@ionic-native/push": "^3.10.3",
         "@ionic-native/splash-screen": "3.7.0",
@@ -28,6 +29,8 @@
         "angular2-highcharts": "^0.5.5",
         "angular2-jwt": "^0.2.3",
         "cordova-android": "^6.2.3",
+        "cordova-plugin-camera": "^2.4.1",
+        "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-splashscreen": "^4.0.3",
@@ -60,7 +63,8 @@
             "ionic-plugin-keyboard": {},
             "phonegap-plugin-push": {
                 "SENDER_ID": "479076121612"
-            }
+            },
+            "cordova-plugin-camera": {}
         },
         "platforms": [
             "android"
