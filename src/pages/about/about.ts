@@ -36,7 +36,17 @@ export class AboutPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AboutPage');
+    this.id = localStorage.getItem('id');
+    this.userProvider.getImage(this.id)
+      .then((data: any) => {
+        if (data.ok) {
+          this.base64 = data.image;
+          this.base64Preview = 'data:image/jpeg;base64,' + data.image;
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+    })
   }
 
   takePicture() {

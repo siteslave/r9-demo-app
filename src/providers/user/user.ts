@@ -155,5 +155,18 @@ export class UserProvider {
     })
   }
 
+  getImage(id: any) {
+    return new Promise((resolve, reject) => {
+      let url = `${this.url}/students/get-image/${id}`;
+      this.authHttp.get(url)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    })
+  }
+
 
 }
