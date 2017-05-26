@@ -139,5 +139,21 @@ export class UserProvider {
     })
   }
 
+  saveImage(id: any, image: string) {
+    return new Promise((resolve, reject) => {
+      let url = `${this.url}/students/save-image`;
+      this.authHttp.post(url, {
+        id: id,
+        image: image
+      })
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    })
+  }
+
 
 }

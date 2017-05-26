@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {
+  IonicPage,
+  NavController, NavParams,
+  AlertController,
+  LoadingController
+} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+
+import { UserProvider } from '../../providers/user/user';
+
 
 @IonicPage()
 @Component({
@@ -12,10 +20,16 @@ export class AboutPage {
   name: string;
   base64Preview: string;
 
+  base64: string;
+  id: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private camera: Camera
+    private camera: Camera,
+    private userProvider: UserProvider,
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController
   ) {
     this.name = this.navParams.get('name');
     let data = this.navParams.data;
@@ -36,11 +50,12 @@ export class AboutPage {
 
     this.camera.getPicture(options)
       .then((imageData) => {
-      this.base64Preview = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      // Handle error
-      console.log(err);
-    });
+        this.base64 = imageData;
+        this.base64Preview = 'data:image/jpeg;base64,' + imageData;
+      }, (err) => {
+        // Handle error
+        console.log(err);
+      });
 
   }
 
@@ -55,10 +70,52 @@ export class AboutPage {
 
     this.camera.getPicture(options)
       .then((imageData) => {
-      this.base64Preview = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      // Handle error
-      console.log(err);
+        this.base64 = imageData;
+        this.base64Preview = 'data:image/jpeg;base64,' + imageData;
+      }, (err) => {
+        // Handle error
+        console.log(err);
+      });
+  }
+
+  saveImage() {
+    let loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'กำลังบันทึก...'
     });
+    loading.present();
+
+    this.id = localStorage.getItem('id');
+    this.userProvider.saveImage(this.id, this.base64)
+      .then((data: any) => {
+        loading.dismiss();
+        if (data.ok) {
+          // success
+          let alert = this.alertCtrl.create({
+            title: 'ผลการบันทึก',
+            subTitle: 'บันทึกภาพเสร็จเรียบร้อยแล้ว',
+            buttons: ['ตกลง']
+          });
+          alert.present();
+        } else {
+          // error
+          console.log(data.error);
+          let alert = this.alertCtrl.create({
+            title: 'ผลการบันทึก',
+            subTitle: 'เกิดข้อผิดพลาด',
+            buttons: ['ตกลง']
+          });
+          alert.present();
+        }
+      })
+      .catch((error: any) => {
+        loading.dismiss();
+        let alert = this.alertCtrl.create({
+          title: 'ผลการบันทึก',
+          subTitle: 'เกิดข้อผิดพลาดไม่สามารถเชื่อมต่อกับ Server ได้',
+          buttons: ['ตกลง']
+        });
+        alert.present();
+      });
   }
 }
