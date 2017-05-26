@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   IonicPage,
   NavController, NavParams,
@@ -6,6 +6,7 @@ import {
   LoadingController
 } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 import { UserProvider } from '../../providers/user/user';
 
@@ -29,7 +30,9 @@ export class AboutPage {
     private camera: Camera,
     private userProvider: UserProvider,
     private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private photoViewer: PhotoViewer,
+    @Inject('API_URL') private url: string
   ) {
     this.name = this.navParams.get('name');
     let data = this.navParams.data;
@@ -127,5 +130,14 @@ export class AboutPage {
         });
         alert.present();
       });
+  }
+
+  previewPicture() {
+    let id = localStorage.getItem('id');
+    let token = localStorage.getItem('token');
+    let fullname = localStorage.getItem('fullname');
+
+    let url = `${this.url}/students/preview-image/${id}?token=${token}`;
+    this.photoViewer.show(url, fullname, {share: false});
   }
 }
