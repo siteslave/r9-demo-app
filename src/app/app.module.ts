@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Push } from '@ionic-native/push';
 import { Camera } from '@ionic-native/camera';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { SQLite } from '@ionic-native/sqlite';
 
 import { HttpModule, Http } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
@@ -87,6 +88,7 @@ export function getAuthHttp(http) {
     Push,
     Camera,
     PhotoViewer,
+    SQLite,
     { provide: HighchartsStatic, useFactory: highchartsFactory },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: 'API_URL', useValue: 'http://192.168.43.76:3000' },
