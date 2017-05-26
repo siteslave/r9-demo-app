@@ -2,17 +2,18 @@
 
   <ion-navbar color="teal">
     <ion-title>รายชื่อติดต่อ</ion-title>
-    <ion-buttons start>
-      <button ion-button icon-only (click)="addContact()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="addContact()"><ion-icon name="person-add"></ion-icon></button>
+  </ion-fab>
+  <ion-toolbar color="primary">
+    <ion-searchbar (ionInput)="search($event)" debounce="1000"></ion-searchbar>
+  </ion-toolbar>
   <ion-list no-lines>
 
   <ion-item-group>

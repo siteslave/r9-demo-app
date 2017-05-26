@@ -140,4 +140,49 @@ export class ContactsPage {
     this.navCtrl.push(ContactNewPage, contact);
   }
 
+  search(event) {
+
+    let query = event.target.value;
+    let _query = `%${query}%`; 
+
+    this.contacts = [];
+
+    this.platform.ready().then(() => {
+      this.db.create({
+        name: 'data.db',
+        location: 'default'
+      })
+        .then((connection: SQLiteObject) => {
+          let sql = `
+            SELECT * FROM contacts
+            WHERE first_name like ? or last_name like ?
+            `;
+          connection.executeSql(sql, [_query, _query])
+            .then(rs => {
+              let rows = rs.rows;
+              if (rows.length > 0) {
+                for (let i = 0; i < rows.length; i++) {
+                  console.log(rows.item(i));
+                  this.contacts.push({
+                    id: rows.item(i).id,
+                    first_name: rows.item(i).first_name,
+                    last_name: rows.item(i).last_name,
+                    email: rows.item(i).email,
+                    telephone: rows.item(i).telephone
+                  });
+                }
+                console.log(this.contacts);
+              } else {
+                console.log('No data');
+              }
+            }, error => {
+              alert(JSON.stringify(error));
+            });
+        }, (error) => {
+          console.log(error);
+        });
+    })
+    
+  }
+
 }
