@@ -11,6 +11,7 @@ export class ContactNewPage {
   firstName: string;
   lastName: string;
   email: string;
+  telephone: string;
   db: SQLite = new SQLite();
   connection: SQLiteObject;
 
@@ -41,10 +42,10 @@ export class ContactNewPage {
   saveContact() {
     let sql = `
     INSERT INTO 
-    contacts(first_name, last_name, email)
-    VALUES(?, ?, ?)`;
+    contacts(first_name, last_name, email, telephone)
+    VALUES(?, ?, ?, ?)`;
 
-    this.connection.executeSql(sql, [this.firstName, this.lastName, this.email])
+    this.connection.executeSql(sql, [this.firstName, this.lastName, this.email, this.telephone])
       .then(data => {
         this.navCtrl.pop();
       }, error => {

@@ -27,6 +27,11 @@
   </ion-item>
 
   <ion-item>
+    <ion-label floating>Telephone</ion-label>
+    <ion-input [(ngModel)]="telephone" type="tel"></ion-input>
+  </ion-item>
+
+  <ion-item>
     <button ion-button (click)="saveContact()">Save</button>
   </ion-item>
 </ion-list>
