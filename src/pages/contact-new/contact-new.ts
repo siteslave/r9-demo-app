@@ -15,6 +15,9 @@ export class ContactNewPage {
   db: SQLite = new SQLite();
   connection: SQLiteObject;
 
+  isUpdate = false;
+  id: number;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -32,7 +35,15 @@ export class ContactNewPage {
         }, (error) => {
           console.log(error);
         });
-    })
+    });
+
+    let data = this.navParams.data;
+    this.id = data.id;
+    this.firstName = data.first_name;
+    this.lastName = data.last_name;
+    this.email = data.email;
+    this.telephone = data.telephone;
+    if (this.id) this.isUpdate = true;
   }
 
   ionViewDidLoad() {
@@ -40,17 +51,37 @@ export class ContactNewPage {
   }
 
   saveContact() {
-    let sql = `
-    INSERT INTO 
-    contacts(first_name, last_name, email, telephone)
-    VALUES(?, ?, ?, ?)`;
+    if (this.isUpdate) {
+      let sql = `
+        UPDATE
+        contacts SET first_name=?, last_name=?, email=?, telephone=?
+        WHERE id=?`;
 
-    this.connection.executeSql(sql, [this.firstName, this.lastName, this.email, this.telephone])
-      .then(data => {
-        this.navCtrl.pop();
-      }, error => {
-        alert(JSON.stringify(error));
-      });
+      this.connection.executeSql(sql, [
+        this.firstName,
+        this.lastName,
+        this.email,
+        this.telephone,
+        this.id
+      ])
+        .then(data => {
+          this.navCtrl.pop();
+        }, error => {
+          alert(JSON.stringify(error));
+        });
+    } else {
+      let sql = `
+        INSERT INTO 
+        contacts(first_name, last_name, email, telephone)
+        VALUES(?, ?, ?, ?)`;
+
+      this.connection.executeSql(sql, [this.firstName, this.lastName, this.email, this.telephone])
+        .then(data => {
+          this.navCtrl.pop();
+        }, error => {
+          alert(JSON.stringify(error));
+        });
+    }
   }
 
 }

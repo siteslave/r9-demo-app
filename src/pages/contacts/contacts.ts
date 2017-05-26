@@ -136,4 +136,8 @@ export class ContactsPage {
 
   }
 
+  edit(contact) {
+    this.navCtrl.push(ContactNewPage, contact);
+  }
+
 }
